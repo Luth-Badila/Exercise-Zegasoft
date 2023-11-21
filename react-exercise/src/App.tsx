@@ -5,27 +5,27 @@ import "./App.css";
 
 interface Data {
   id: number;
-  name: string;
+  date: string;
   savings: number;
 }
 
 const datas: Data[] = [
-  { id: 1, name: "John Doe", savings: 10000 },
-  { id: 2, name: "Jane Doe", savings: 20000 },
-  { id: 3, name: "Bob Smith", savings: 40000 },
-  { id: 4, name: "Ryan", savings: 250000 },
+  { id: 1, date: "08-10-2023", savings: 10000 },
+  { id: 2, date: "09-10-2023", savings: 20000 },
+  { id: 3, date: "10-10-2023", savings: 40000 },
+  { id: 4, date: "11-10-2023", savings: 250000 },
 ];
 
 const columns = [
   { Header: "ID", accessor: "id" },
-  { Header: "Name", accessor: "name" },
+  { Header: "date", accessor: "date" },
   { Header: "Savings", accessor: "savings" },
 ];
 
 const App: React.FC = () => {
   const [data, setData] = useState<Data[]>(datas);
   // const [col] = useState(columns);
-  const [newData, setNewData] = useState<Data>({ id: 0, name: "", savings: 0 });
+  const [newData, setNewData] = useState<Data>({ id: 0, date: "", savings: 0 });
   const [totalSavings, setTotalSavings] = useState<number>(calculateTotalSavings(datas));
 
   useEffect(() => {
@@ -49,13 +49,13 @@ const App: React.FC = () => {
     const newDataWithId: Data = {
       ...newData,
       id: data.length + 1,
-      name: newData.name,
+      date: newData.date,
       savings: parseInt(newData.savings, 0),
     };
 
     const updatedData = [...data, newDataWithId];
     setData(updatedData);
-    setNewData({ id: 0, name: "", savings: 0 });
+    setNewData({ id: 0, date: "", savings: 0 });
 
     console.log(updatedData);
     console.log(calculateTotalSavings(updatedData));
@@ -87,8 +87,8 @@ const App: React.FC = () => {
           <input type="number" name="id" value={newData.id} onChange={handleInputChange} />
         </label>
         <label>
-          Name:
-          <input type="text" name="name" value={newData.name} onChange={handleInputChange} />
+          Date:
+          <input type="text" name="date" value={newData.date} onChange={handleInputChange} />
           {/* <button onClick={handleDelete}>delete</button> */}
         </label>
         <label>
